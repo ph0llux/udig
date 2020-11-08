@@ -1,13 +1,13 @@
 [package]
-name = "udig"
-version = "0.1.0"
+name = "urdig"
+version = "0.4.0"
 authors = ["ph0llux <ph0llux@pm.me>"]
 edition = "2018"
 description = "Grab device informations via libudev and display or parse them."
 publish = false
 
 [lib]
-name = "udig"     		# The name of the target.
+name = "urdig"     		# The name of the target.
 path = "src/lib/mod.rs"	# The source file of the target.
 test = true            	# Is tested by default.
 bench = true           	# Is benchmarked by default.
@@ -15,8 +15,8 @@ edition = "2018"       	# The edition of the target.
 crate-type = ["lib"]   	# The crate types to generate.
 
 [[bin]]
-name = "udig"
-path = "src/bin/udig.rs"
+name = "urdig"
+path = "src/bin/urdig.rs"
 test = true
 bench = true
 

@@ -1,7 +1,7 @@
 
 use std::io;
 
-use crate as udig;
+use crate as urdig;
 
 pub trait ToIOResult<T> {
 	fn to_io_result(self) -> io::Result<T>;
@@ -20,7 +20,7 @@ impl<T> ToIOResult<T> for Option<T> {
 	fn to_io_result(self) -> io::Result<T> {
 		match self {
 			Some(x) => Ok(x),
-			None => Err(io::Error::new(io::ErrorKind::Other, udig::ERROR_VALUE_NONE)),
+			None => Err(io::Error::new(io::ErrorKind::Other, urdig::ERROR_VALUE_NONE)),
 		}
 	}
 }

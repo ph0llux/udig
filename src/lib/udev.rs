@@ -1,14 +1,14 @@
 use std::collections::HashMap;
 use std::io;
 
-use crate as udig;
+use crate as urdig;
 use crate::traits::*;
 
 pub fn get_subsystems() -> io::Result<Vec<String>> {
 	let mut subsystems = Vec::with_capacity(80);
 	let mut enumerator = udev::Enumerator::new()?;
 	for device in enumerator.scan_devices()? {
-		let property = device.property_value(udig::PROPERTY_VALUE_SUBSYSTEM).to_io_result()?;
+		let property = device.property_value(urdig::PROPERTY_VALUE_SUBSYSTEM).to_io_result()?;
 		if !subsystems.contains(&property.to_str().to_io_result()?.to_string()) {
 			subsystems.push(property.to_str().to_io_result()?.to_string())
 		}
@@ -37,9 +37,13 @@ pub fn get_attributes_by_sysname<S: Into<String>>(sysname: S) -> io::Result<Hash
 	enumerator.match_sysname(sysname.into())?;
 	for device in enumerator.scan_devices()? {
 		for attribute in device.attributes() {
+			let value = match attribute.value() {
+				Some(x) => x.to_str().to_string_option(),
+				None => None
+			};
 			attributes.insert(
 				attribute.name().to_str().to_io_result()?.to_string(),
-				attribute.value().to_io_result()?.to_str().to_string_option(),
+				value,
 			);
 		}
 	}
