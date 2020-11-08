@@ -30,3 +30,18 @@ pub fn get_properties_by_sysname<S: Into<String>>(sysname: S) -> io::Result<Hash
 	}
 	Ok(properties)
 }
+
+pub fn get_attributes_by_sysname<S: Into<String>>(sysname: S) -> io::Result<HashMap<String, Option<String>>> {
+	let mut attributes: HashMap<String, Option<String>> = HashMap::with_capacity(40);
+	let mut enumerator = udev::Enumerator::new()?;
+	enumerator.match_sysname(sysname.into())?;
+	for device in enumerator.scan_devices()? {
+		for attribute in device.attributes() {
+			attributes.insert(
+				attribute.name().to_str().to_io_result()?.to_string(),
+				attribute.value().to_io_result()?.to_str().to_string_option(),
+			);
+		}
+	}
+	Ok(attributes)
+}

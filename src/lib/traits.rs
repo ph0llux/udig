@@ -1,3 +1,4 @@
+
 use std::io;
 
 use crate as udig;
@@ -20,6 +21,19 @@ impl<T> ToIOResult<T> for Option<T> {
 		match self {
 			Some(x) => Ok(x),
 			None => Err(io::Error::new(io::ErrorKind::Other, udig::ERROR_VALUE_NONE)),
+		}
+	}
+}
+
+pub trait OptionExtensions<T> {
+	fn to_string_option(self) -> Option<String>;
+}
+
+impl<T: ToString> OptionExtensions<T> for Option<T> {
+	fn to_string_option(self) -> Option<String> {
+		match self {
+			Some(x) => Some(x.to_string()),
+			None => None,
 		}
 	}
 }
