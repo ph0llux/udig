@@ -1,4 +1,4 @@
-# udig
+# urdig
 The **u**dev **r**ecognized **d**evices **i**nformations **g**rabber.
 
 ## Installation
