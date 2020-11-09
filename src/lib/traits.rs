@@ -1,4 +1,5 @@
 
+use std::path::Path;
 use std::io;
 
 use crate as urdig;
@@ -34,6 +35,22 @@ impl<T: ToString> OptionExtensions<T> for Option<T> {
 		match self {
 			Some(x) => Some(x.to_string()),
 			None => None,
+		}
+	}
+}
+
+pub trait OptionToString {
+	fn to_string(self) -> String;
+}
+
+impl OptionToString for Option<&Path> {
+	fn to_string(self) -> String {
+		match self {
+			Some(x) => match x.to_str() {
+				Some(x) => x.to_string(),
+				None => "None".to_string()
+			},
+			None => "None".to_string()
 		}
 	}
 }
