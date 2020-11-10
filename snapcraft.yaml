@@ -1,0 +1,16 @@
+name: urdig
+version: git
+summary: Tool to grab information about devices via udev, written in Rust
+description: |
+  urdig is a tool, which can be used to display
+  informations about several (udev)-devices.
+base: core20
+confinement: devmode
+parts:
+  urdig:
+    build-packages: [ libudev-dev, pkg-config ]
+    plugin: rust
+    source: .
+apps:
+  test-xsv:
+    command: bin/urdig
