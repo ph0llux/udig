@@ -30,22 +30,22 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 You could download the tool manually and build it with cargo:
 ```bash
-git clone https://github.com/ph0llux/udig
-cd udig
+git clone https://github.com/ph0llux/urdig
+cd urdig
 cargo build --release
 ```
-The binary can be find at ```./target/release/udig```.
+The binary can be find at ```./target/release/urdig```.
 
 ## Usage
 You can print the help menu by using
 ```bash
-$ ./target/debug/udig --help
-udig 0.1.0
+$ ./target/debug/urdig --help
+urdig 0.1.0
 ph0llux <ph0llux@pm.me>
 Grab device informations via libudev and display or parse them.
 
 USAGE:
-    udig [SUBCOMMAND]
+    urdig [SUBCOMMAND]
 
 FLAGS:
     -h, --help       Prints help information
