@@ -1,10 +1,10 @@
 [package]
 name = "urdig"
-version = "0.7.0"
+version = "0.9.0"
 authors = ["ph0llux <ph0llux@pm.me>"]
 edition = "2018"
 description = "Grab device informations via libudev and display or parse them."
-publish = false
+publish = true
 
 [lib]
 name = "urdig"     		# The name of the target.

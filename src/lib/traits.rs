@@ -48,9 +48,18 @@ impl OptionToString for Option<&Path> {
 		match self {
 			Some(x) => match x.to_str() {
 				Some(x) => x.to_string(),
-				None => "None".to_string()
+				None => urdig::ERROR_VALUE_NONE.to_string()
 			},
-			None => "None".to_string()
+			None => urdig::ERROR_VALUE_NONE.to_string()
+		}
+	}
+}
+
+impl OptionToString for Option<&str> {
+	fn to_string(self) -> String {
+		match self {
+			Some(x) => x.to_string(),
+			None => urdig::ERROR_VALUE_NONE.to_string()
 		}
 	}
 }

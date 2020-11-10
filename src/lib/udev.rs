@@ -86,23 +86,73 @@ pub fn get_properties<S: Into<String>>(name: S, source: Source) -> io::Result<Ha
 	}
 }
 
-pub fn get_attributes_by_sysname<S: Into<String>>(sysname: S) -> io::Result<HashMap<String, Option<String>>> {
-	let mut attributes: HashMap<String, Option<String>> = HashMap::with_capacity(40);
-	let mut enumerator = udev::Enumerator::new()?;
-	enumerator.match_sysname(sysname.into())?;
-	for device in enumerator.scan_devices()? {
-		for attribute in device.attributes() {
-			let value = match attribute.value() {
-				Some(x) => x.to_str().to_string_option(),
-				None => None
-			};
-			attributes.insert(
-				attribute.name().to_str().to_io_result()?.to_string(),
-				value,
-			);
+pub fn get_attributes<S: Into<String>>(name: S, source: Source) -> io::Result<HashMap<String, String>> {
+	fn by_sysname<S: Into<String>>(name: S) -> io::Result<HashMap<String, String>> {
+		let mut attributes: HashMap<String, String> = HashMap::with_capacity(40);
+		let mut enumerator = udev::Enumerator::new()?;
+		enumerator.match_sysname(name.into().trim())?;
+		for device in enumerator.scan_devices()? {
+			for attribute in device.attributes() {
+				let value = match attribute.value() {
+						Some(x) => x.to_str().to_string(),
+						None => urdig::ERROR_VALUE_NONE.to_string()
+					};
+				attributes.insert(
+					attribute.name().to_str().to_io_result()?.to_string(),
+					value,
+				);
+			}
 		}
+		Ok(attributes)
 	}
-	Ok(attributes)
+	fn by_devnode<S: Into<String>>(name: S) -> io::Result<HashMap<String, String>> {
+		let name = name.into();
+		let mut split = name.trim().rsplit(urdig::SEPARATOR_SYSTEM_DIRECTORY);
+		let name = split.next().to_io_result()?;
+		let mut attributes: HashMap<String, String> = HashMap::with_capacity(40);
+		let mut enumerator = udev::Enumerator::new()?;
+		enumerator.match_sysname(name)?;
+		for device in enumerator.scan_devices()? {
+			for attribute in device.attributes() {
+				let value = match attribute.value() {
+						Some(x) => x.to_str().to_string(),
+						None => urdig::ERROR_VALUE_NONE.to_string()
+					};
+				attributes.insert(
+					attribute.name().to_str().to_io_result()?.to_string(),
+					value,
+				);
+			}
+		}
+		Ok(attributes)
+	}
+
+	fn by_syspath<S: Into<String>>(name: S) -> io::Result<HashMap<String, String>> {
+		let name = name.into();
+		let mut split = name.trim().rsplit(urdig::SEPARATOR_SYSTEM_DIRECTORY);
+		let name = split.next().to_io_result()?;
+		let mut attributes: HashMap<String, String> = HashMap::with_capacity(40);
+		let mut enumerator = udev::Enumerator::new()?;
+		enumerator.match_sysname(name)?;
+		for device in enumerator.scan_devices()? {
+			for attribute in device.attributes() {
+				let value = match attribute.value() {
+						Some(x) => x.to_str().to_string(),
+						None => urdig::ERROR_VALUE_NONE.to_string()
+					};
+				attributes.insert(
+					attribute.name().to_str().to_io_result()?.to_string(),
+					value,
+				);
+			}
+		}
+		Ok(attributes)
+	}
+	match source {
+		Source::Sysname => by_sysname(name),
+		Source::Devnode => by_devnode(name),
+		Source::Syspath => by_syspath(name),
+	}
 }
 
 
