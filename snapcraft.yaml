@@ -1,5 +1,5 @@
 name: urdig
-version: git
+adopt-info: urdig
 summary: Tool to grab information about devices via udev, written in Rust
 description: |
   urdig is a tool, which can be used to display
@@ -10,7 +10,15 @@ parts:
   urdig:
     build-packages: [ libudev-dev, pkg-config ]
     plugin: rust
-    source: .
+    source: https://github.com/ph0llux/urdig.git
+    override-pull: |
+      snapcraftctl pull
+      version="$(git describe --tags --abbrev=0)"
+      [ -n "$(echo $version)" ] && grade=devel || grade=stable
+      snapcraftctl set-version "$version"
+      snapcraftctl set-grade "$grade"
 apps:
   test-xsv:
     command: bin/urdig
+architectures:
+  - build-on: [amd64,i386,arm,arm64]
