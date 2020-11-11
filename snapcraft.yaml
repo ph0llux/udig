@@ -14,11 +14,11 @@ parts:
     override-pull: |
       snapcraftctl pull
       version="$(git describe --tags --abbrev=0)"
-      [ -n "$(echo $version)" ] && grade=devel || grade=stable
+      [ -n "$(echo $version)" ] && grade=stable
       snapcraftctl set-version "$version"
       snapcraftctl set-grade "$grade"
 apps:
   test-xsv:
     command: bin/urdig
 architectures:
-  - build-on: [amd64,i386,arm,arm64]
+  - build-on: [amd64,arm64]
