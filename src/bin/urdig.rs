@@ -1,7 +1,7 @@
 extern crate clap;
 extern crate udev;
 
-use clap::{App, Arg};
+use clap::{App, Arg, AppSettings};
 use std::io;
 use urdig;
 use urdig::udev::{Source};
@@ -12,6 +12,7 @@ fn main() -> io::Result<()> {
 		.version(urdig::CARGO_PKG_VERSION)
 		.author(urdig::CARGO_PKG_AUTHORS)
 		.about(urdig::CARGO_PKG_DESCRIPTION)
+		.setting(AppSettings::ArgRequiredElseHelp)
 		.subcommand(
 			App::new(CLAP_SUBCOMMAND_SUBSYSTEMS)
 				.about(CLAP_SUBCOMMAND_SUBSYSTEMS_DESCRIPTION)
