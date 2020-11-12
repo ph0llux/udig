@@ -29,7 +29,8 @@ fn main() -> io::Result<()> {
 						.help(CLAP_SUBCOMMAND_SUBSYSTEMS_ARG_SUBSYSTEMNAME_DESCRIPTION)
 						.takes_value(true)
 						.required(false),
-					]),
+					])
+				.setting(AppSettings::ArgRequiredElseHelp)
 		)
 		.subcommand(
 			App::new(CLAP_SUBCOMMAND_DEVICE)
@@ -61,7 +62,8 @@ fn main() -> io::Result<()> {
 						.possible_values(&CLAP_POSSIBLE_FORMAT_VALUES)
 						.takes_value(true)
 						.required(false),
-				]),
+				])
+				.setting(AppSettings::ArgRequiredElseHelp)
 		)
 		.get_matches();
 	//SUBSYSTEMS
