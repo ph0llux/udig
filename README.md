@@ -19,7 +19,7 @@ You need the udev development files, which could be installed by following comma
 |--------------|---------------------------|
 | Fedora       | dnf install systemd-devel |
 | Ubuntu       | apt install libudev-dev   |
-| Debian       | apt install lubudev-dev   |
+| Debian       | apt install libudev-dev   |
 
 You need also a rust compiler and cargo. The most suitable way to install it, is [using rustup](https://rustup.rs/):
 ```bash
@@ -39,8 +39,8 @@ The binary can be find at ```./target/release/urdig```.
 ## Usage
 You can print the help menu by using
 ```bash
-$ ./target/debug/urdig --help
-urdig 0.1.0
+$ urdig 
+urdig 0.9.3
 ph0llux <ph0llux@pm.me>
 Grab device informations via libudev and display or parse them.
 
@@ -52,7 +52,13 @@ FLAGS:
     -V, --version    Prints version information
 
 SUBCOMMANDS:
+    device        print options for specific device, which is called via its name. You can also use devnodes or
+                  syspaths.
     help          Prints this message or the help of the given subcommand(s)
     subsystems    interacting with udev subsystems.
-    sysname       print options for specific device, which is called via its sysname.
+```
+and grab informations of any device
+```
+$ urdig device -p /dev/sda
+[output omitted]
 ```
