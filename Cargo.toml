@@ -3,8 +3,12 @@ name = "urdig"
 version = "0.9.3"
 authors = ["ph0llux <ph0llux@pm.me>"]
 edition = "2018"
-description = "Grab device informations via libudev and display or parse them."
+description = """
+urdig is a tool, which can be used to display
+  informations about several (udev)-devices.
+ """
 publish = true
+readme = "README.md"
 
 [lib]
 name = "urdig"     		# The name of the target.
@@ -27,3 +31,4 @@ panic = 'unwind'
 [dependencies]
 udev = "0.5"
 clap = "2"
+phollaits = "0.1"

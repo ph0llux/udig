@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::io;
 
 use crate as urdig;
-use crate::traits::*;
+use phollaits::*;
 
 pub fn get_subsystems() -> io::Result<Vec<String>> {
 	let mut subsystems = Vec::with_capacity(80);
