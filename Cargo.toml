@@ -1,6 +1,6 @@
 [package]
 name = "urdig"
-version = "0.9.3"
+version = "0.9.5"
 authors = ["ph0llux <ph0llux@pm.me>"]
 edition = "2018"
 description = """
