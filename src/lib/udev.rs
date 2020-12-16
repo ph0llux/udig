@@ -13,6 +13,7 @@ pub fn get_subsystems() -> io::Result<Vec<String>> {
 			subsystems.push(property.to_str().to_io_result()?.to_string())
 		}
 	}
+	subsystems.sort();
 	Ok(subsystems)
 }
 
@@ -26,6 +27,7 @@ pub fn get_nodes_from_subsystem<S: Into<String>>(subsystem: S) -> io::Result<Vec
 			None => devnodes.push(device.syspath().to_str().to_io_result()?.to_string())
 		}
 	}
+	devnodes.sort();
 	Ok(devnodes)
 }
 
