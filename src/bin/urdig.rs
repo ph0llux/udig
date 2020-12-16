@@ -1,11 +1,12 @@
 extern crate clap;
 extern crate udev;
+extern crate phollaits;
 
 use clap::{App, Arg, AppSettings};
 use std::io;
 use urdig;
 use urdig::udev::{Source};
-use urdig::traits::*;
+use phollaits::*;
 
 fn main() -> io::Result<()> {
 	let matches = App::new(urdig::CARGO_PKG_NAME)
