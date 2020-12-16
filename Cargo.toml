@@ -4,6 +4,8 @@ version = "0.9.5"
 authors = ["ph0llux <ph0llux@pm.me>"]
 edition = "2018"
 license-file = "LICENSE"
+homepage = "https://github.com/ph0llux/urdig"
+repository = "https://github.com/ph0llux/urdig"
 description = """
 urdig is a tool, which can be used to display
   informations about several (udev)-devices.
