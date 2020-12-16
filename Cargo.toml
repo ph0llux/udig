@@ -12,6 +12,7 @@ urdig is a tool, which can be used to display
  """
 publish = true
 readme = "README.md"
+exclude = ["build/*", "doc/*", "snapcraft.yaml"]
 
 [lib]
 name = "urdig"     		# The name of the target.
