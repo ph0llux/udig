@@ -26,6 +26,13 @@ You need also a rust compiler and cargo. The most suitable way to install it, is
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
+#### installing via cargo install
+
+You can easy install urdig by
+```bash
+cargo install urdig
+```
+
 #### building manually
 
 You could download the tool manually and build it with cargo:
