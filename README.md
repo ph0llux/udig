@@ -1,3 +1,5 @@
+<img src="https://img.shields.io/crates/d/urdig?style=for-the-badge"/> <img src="https://img.shields.io/crates/v/urdig?color=blue&logo=Rust&style=for-the-badge"/> <img src="https://img.shields.io/crates/v/urdig?color=blue&label=docs&logo=Rust&style=for-the-badge"/> <img src="https://img.shields.io/crates/l/urdig?style=for-the-badge"/> 
+
 # urdig
 The **u**dev **r**ecognized **d**evices **i**nformation **g**rabber.
 
