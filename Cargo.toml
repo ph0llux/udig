@@ -1,6 +1,6 @@
 [package]
 name = "urdig"
-version = "0.9.6"
+version = "1.0.0"
 authors = ["ph0llux <ph0llux@pm.me>"]
 edition = "2018"
 license =" BSD-3-Clause"
@@ -35,4 +35,4 @@ panic = 'unwind'
 [dependencies]
 udev = "0.5"
 clap = "2"
-phollaits = "0.1"
+phollaits = "0.2"

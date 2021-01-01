@@ -165,16 +165,26 @@ fn print_device_properties<S: Into<String>>(name: S, format: Format, source: Sou
 	match format {
 		Format::Listing => {
 			println!("{} {} {}", urdig::PROPERTY_VALUE_SYSNAME, urdig::SEPARATOR_COLON, name);
+			let mut output = Vec::new();
 			for (name, value) in urdig::udev::get_properties(name, source)? {
-				println!("{} : {}", name, value);
+				output.push(format!("{} : {}", name, value));
+			}
+			output.sort();
+			for line in output {
+				println!("{}", line);
 			}
 			return Ok(());
 		}
 		Format::Json => {
 			println!("{}", urdig::SEPARATOR_BRACE_OPEN);
 			println!("\t\"{}\" {} {}", urdig::PROPERTY_VALUE_SYSNAME, urdig::SEPARATOR_COLON, urdig::SEPARATOR_BRACE_OPEN);
+			let mut output = Vec::new();
 			for (name, value) in urdig::udev::get_properties(name, source)? {
-				println!("\t\t\"{}\" {} \"{}\"", name, urdig::SEPARATOR_COLON, value);
+				output.push(format!("\t\t\"{}\" {} \"{}\"", name, urdig::SEPARATOR_COLON, value));
+			}
+			output.sort();
+			for line in output {
+				println!("{}", line);
 			}
 			println!("\t{}", urdig::SEPARATOR_BRACE_CLOSE);
 			println!("{}", urdig::SEPARATOR_BRACE_CLOSE);
@@ -182,8 +192,13 @@ fn print_device_properties<S: Into<String>>(name: S, format: Format, source: Sou
 		}
 		Format::Toml => {
 			println!("{}{}{}", urdig::SEPARATOR_SQUARE_BRACKET_OPEN, name, urdig::SEPARATOR_SQUARE_BRACKET_CLOSE);
+			let mut output = Vec::new();
 			for (name, value) in urdig::udev::get_properties(name, source)? {
-				println!("{}{}\"{}\"", name, urdig::SEPARATOR_EQUAL, value);
+				output.push(format!("{}{}\"{}\"", name, urdig::SEPARATOR_EQUAL, value));
+			}
+			output.sort();
+			for line in output {
+				println!("{}", line);
 			}
 			return Ok(());
 		}
@@ -195,16 +210,26 @@ fn print_device_attributes<S: Into<String>>(name: S, format: Format, source: Sou
 	match format {
 		Format::Listing => {
 			println!("{} {} {}", urdig::PROPERTY_VALUE_SYSNAME, urdig::SEPARATOR_COLON, name);
+			let mut output = Vec::new();
 			for (name, value) in urdig::udev::get_attributes(name, source)? {
-				println!("{} : {}", name, value);
+				output.push(format!("{} : {}", name, value));
+			}
+			output.sort();
+			for line in output {
+				println!("{}", line);
 			}
 			return Ok(());
 		}
 		Format::Json => {
 			println!("{}", urdig::SEPARATOR_BRACE_OPEN);
 			println!("\t\"{}\" {} {}", urdig::PROPERTY_VALUE_SYSNAME, urdig::SEPARATOR_COLON, urdig::SEPARATOR_BRACE_OPEN);
+			let mut output = Vec::new();
 			for (name, value) in urdig::udev::get_attributes(name, source)? {
-				println!("\t\t\"{}\" {} \"{}\"", name, urdig::SEPARATOR_COLON, value);
+				output.push(format!("\t\t\"{}\" {} \"{}\"", name, urdig::SEPARATOR_COLON, value));
+			}
+			output.sort();
+			for line in output {
+				println!("{}", line);
 			}
 			println!("\t{}", urdig::SEPARATOR_BRACE_CLOSE);
 			println!("{}", urdig::SEPARATOR_BRACE_CLOSE);
@@ -212,8 +237,13 @@ fn print_device_attributes<S: Into<String>>(name: S, format: Format, source: Sou
 		}
 		Format::Toml => {
 			println!("{}{}{}", urdig::SEPARATOR_SQUARE_BRACKET_OPEN, name, urdig::SEPARATOR_SQUARE_BRACKET_CLOSE);
+			let mut output = Vec::new();
 			for (name, value) in urdig::udev::get_attributes(name, source)? {
-				println!("{}{}\"{}\"", name, urdig::SEPARATOR_EQUAL, value);
+				output.push(format!("{}{}\"{}\"", name, urdig::SEPARATOR_EQUAL, value));
+			}
+			output.sort();
+			for line in output {
+				println!("{}", line);
 			}
 			return Ok(());
 		}
